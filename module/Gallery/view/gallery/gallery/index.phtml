@@ -1,0 +1,14 @@
+<?php
+
+$title = 'Index gallery page';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+
+<?php foreach ($slugs as $slug) : ?>
+<div>
+    <a href="<?= $this->url('gallery', ['action' => 'gallery', 'slug' => $slug]) ?>">
+        <?= $slug ?>
+    </a>
+</div>
+<?php endforeach; ?>
