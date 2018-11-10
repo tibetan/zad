@@ -108,5 +108,4 @@ class Image
     {
         $this->art = $art;
     }
-
 }
