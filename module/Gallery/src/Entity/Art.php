@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @property int $id
  * @property string $title
  * @property string $description
+ * @property int $slug
  */
 class Art
 {
@@ -32,6 +33,11 @@ class Art
      */
     protected $description;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Slug")
+     * @ORM\JoinColumn(name="slug_id", referencedColumnName="id")
+     */
+    private $slug;
 
     /**
      * @return int
@@ -81,4 +87,19 @@ class Art
         $this->description = $description;
     }
 
+    /**
+     * @return int
+     */
+    public function getSlug(): int
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param int $slug
+     */
+    public function setSlug(int $slug): void
+    {
+        $this->slug = $slug;
+    }
 }

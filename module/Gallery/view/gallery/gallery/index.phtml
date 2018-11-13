@@ -6,9 +6,9 @@ $this->headTitle($title);
 <h1><?= $this->escapeHtml($title) ?></h1>
 
 <?php foreach ($slugs as $slug) : ?>
-<div>
+<span>
     <a href="<?= $this->url('gallery', ['action' => 'gallery', 'slug' => $slug]) ?>">
         <?= $slug ?>
     </a>
-</div>
+</span>
 <?php endforeach; ?>

@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @property int $id
  * @property string $slug
  * @property string $text
+ * @property int $priority
  */
 class Slug
 {
@@ -32,6 +33,10 @@ class Slug
      */
     protected $text;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $priority;
 
     /**
      * @return int
@@ -79,5 +84,21 @@ class Slug
     public function setText(string $text): void
     {
         $this->text = $text;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPriority(): int
+    {
+        return $this->priority;
+    }
+
+    /**
+     * @param int $priority
+     */
+    public function setPriority(int $priority): void
+    {
+        $this->priority = $priority;
     }
 }
