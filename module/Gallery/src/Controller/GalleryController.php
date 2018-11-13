@@ -8,6 +8,7 @@ use Gallery\Service\GalleryService;
 class GalleryController extends AbstractActionController
 {
     protected $entityManager;
+    protected $qb;
     protected $service;
 
     public function __construct($entityManager)
@@ -18,7 +19,7 @@ class GalleryController extends AbstractActionController
 
     public function indexAction()
     {
-        return ['slugs' => GalleryService::getSlug()];
+        return ['slugs' => $this->service->getSlugs($this->entityManager)];
     }
 
     public function galleryAction()

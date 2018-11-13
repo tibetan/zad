@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @var $slugs
+ */
+
 $title = 'Index gallery page';
 $this->headTitle($title);
 ?>
@@ -7,8 +11,8 @@ $this->headTitle($title);
 
 <?php foreach ($slugs as $slug) : ?>
 <span>
-    <a href="<?= $this->url('gallery', ['action' => 'gallery', 'slug' => $slug]) ?>">
-        <?= $slug ?>
+    <a href="<?= $this->url('gallery', ['action' => 'gallery', 'slug' => $slug->getSlug()]) ?>">
+        <?= $slug->getText() ?>
     </a>
 </span>
 <?php endforeach; ?>

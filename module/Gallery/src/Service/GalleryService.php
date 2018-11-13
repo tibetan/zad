@@ -2,21 +2,30 @@
 
 namespace Gallery\Service;
 
+use Gallery\Repository\SlugRepository;
+use Doctrine\ORM\EntityManager;
+
 class GalleryService
 {
-    const SLUG_CERAMICS = 'ceramics';
-    const SLUG_MOSAIC = 'mosaic';
-    const SLUG_PAINTINGS = 'paintings';
+    /**
+     * @var SlugRepository
+     */
+    protected $slugRepository;
 
     /**
+     * GalleryService constructor.
+     */
+    public function __construct()
+    {
+        $this->slugRepository = new SlugRepository();
+    }
+
+    /**
+     * @param EntityManager $entityManager
      * @return array
      */
-    public static function getSlug() : array
+    public function getSlugs($entityManager): array
     {
-        return [
-            self::SLUG_CERAMICS  => self::SLUG_CERAMICS,
-            self::SLUG_MOSAIC    => self::SLUG_MOSAIC,
-            self::SLUG_PAINTINGS => self::SLUG_PAINTINGS,
-        ];
+        return $this->slugRepository->getSlugs($entityManager);
     }
 }
