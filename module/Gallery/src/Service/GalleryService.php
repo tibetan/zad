@@ -24,7 +24,7 @@ class GalleryService
      * @param EntityManager $entityManager
      * @return array
      */
-    public function getSlugs($entityManager): array
+    public function getSlugs(EntityManager $entityManager): array
     {
         return $this->slugRepository->getSlugs($entityManager);
     }

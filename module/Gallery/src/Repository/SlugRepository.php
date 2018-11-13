@@ -14,7 +14,7 @@ class SlugRepository
      * @param EntityManager $entityManager
      * @return Slug[]
      */
-    public function getSlugs($entityManager): array
+    public function getSlugs(EntityManager $entityManager): array
     {
         $queryBuilder = $entityManager->createQueryBuilder();
         $queryBuilder->select('s')
