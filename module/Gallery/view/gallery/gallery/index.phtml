@@ -11,7 +11,7 @@ $this->headTitle($title);
 
 <?php foreach ($slugs as $slug) : ?>
 <span>
-    <a href="<?= $this->url('gallery', ['action' => 'gallery', 'slug' => $slug->getSlug()]) ?>">
+    <a href="<?= $this->url('gallery', ['action' => 'arts', 'slug' => $slug->getSlug()]) ?>">
         <?= $slug->getText() ?>
     </a>
 </span>

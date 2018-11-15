@@ -23,4 +23,21 @@ class SlugRepository
 
         return $queryBuilder->getQuery()->getResult();
     }
+
+    /**
+     * @param EntityManager $entityManager
+     * @param string $slugName
+     * @return Slug|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getSlug(EntityManager $entityManager, string $slugName): ?Slug
+    {
+        $queryBuilder = $entityManager->createQueryBuilder();
+        $queryBuilder->select('s')
+            ->from(Slug::class, 's')
+            ->where('s.slug = :slug')
+            ->setParameter('slug', $slugName);
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
 }

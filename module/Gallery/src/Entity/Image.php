@@ -13,9 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
  * @property string $path
  * @property string $alt
  * @property int $priority
- * @property int $art
+ * @property Art $art
  */
-class Image
+class Image implements EntityInterface
 {
     /**
      * @ORM\Id
@@ -40,7 +40,7 @@ class Image
     protected $priority;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Art")
+     * @ORM\ManyToOne(targetEntity="Art", inversedBy="images")
      * @ORM\JoinColumn(name="art_id", referencedColumnName="id")
      */
     private $art;
@@ -96,15 +96,31 @@ class Image
     /**
      * @return int
      */
-    public function getArt(): int
+    public function getPriority(): int
+    {
+        return $this->priority;
+    }
+
+    /**
+     * @param int $priority
+     */
+    public function setPriority(int $priority): void
+    {
+        $this->priority = $priority;
+    }
+
+    /**
+     * @return Art
+     */
+    public function getArt(): Art
     {
         return $this->art;
     }
 
     /**
-     * @param int $art
+     * @param Art $art
      */
-    public function setArt(int $art): void
+    public function setArt(Art $art): void
     {
         $this->art = $art;
     }

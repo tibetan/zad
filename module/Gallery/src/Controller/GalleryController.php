@@ -17,17 +17,50 @@ class GalleryController extends AbstractActionController
         $this->service = new GalleryService();
     }
 
+    /**
+     * @return array|\Zend\View\Model\ViewModel
+     */
     public function indexAction()
     {
         return ['slugs' => $this->service->getSlugs($this->entityManager)];
     }
 
-    public function galleryAction()
+    /**
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function artsAction()
     {
-        $params = $this->params()->fromRoute();
+        $slugName = $this->params()->fromRoute('slug');
+
+        if (!$slugName) {
+            $this->getResponse()->setStatusCode(404);
+            return;
+        }
+
+        $slug = $this->service->getSlug($this->entityManager, $slugName);
+
+        if (!$slug) {
+            $this->getResponse()->setStatusCode(404);
+            return;
+        }
+
+        $arts =  $this->service->getArtsBySlug($this->entityManager, $slug);
 
         return [
-            'slug' => $params['slug'],
+            'arts' => $arts,
         ];
+    }
+
+    public function artAction()
+    {
+        $slugName = $this->params()->fromRoute('slug');
+
+        if (!$slugName) {
+            $this->getResponse()->setStatusCode(404);
+            return;
+        }
+
+        return [];
     }
 }

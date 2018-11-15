@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @property string $text
  * @property int $priority
  */
-class Slug
+class Slug implements EntityInterface
 {
     /**
      * @ORM\Id

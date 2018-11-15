@@ -3,6 +3,8 @@
 namespace Gallery\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Arts of gallery
@@ -12,9 +14,9 @@ use Doctrine\ORM\Mapping as ORM;
  * @property int $id
  * @property string $title
  * @property string $description
- * @property int $slug
+ * @property Slug $slug
  */
-class Art
+class Art implements EntityInterface
 {
     /**
      * @ORM\Id
@@ -38,6 +40,16 @@ class Art
      * @ORM\JoinColumn(name="slug_id", referencedColumnName="id")
      */
     private $slug;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="art")
+     */
+    private $images;
+
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -88,18 +100,28 @@ class Art
     }
 
     /**
-     * @return int
+     * @return Slug|null
      */
-    public function getSlug(): int
+    public function getSlug(): ?Slug
     {
         return $this->slug;
     }
 
     /**
-     * @param int $slug
+     * @param Slug|null $slug
      */
-    public function setSlug(int $slug): void
+    public function setSlug(?Slug $slug): void
     {
         $this->slug = $slug;
     }
+
+    /**
+     * @return Collection|Image[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    // TODO addImage() and removeImage() were also added
 }

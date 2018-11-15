@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @var $arts
+ */
+
+?>
+
+<div class="row">
+    <?php foreach ($arts as $a) : ?>
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img
+                        src="<?= $this->basePath($a->getImages()[0]->getPath()) ?>"
+                        alt="<?= $a->getImages()[0]->getAlt() ?>"
+                >
+                <div class="caption">
+                    <h3><?= $a->getTitle() ?></h3>
+                    <p><?= $a->getDescription() ?></p>
+                    <p>
+                        <a
+                            href="<?= $this->url('gallery', [
+                                'action' => 'art',
+                                'slug'   => $a->getSlug()->getSlug(),
+                                'id'     => $a->getId()
+                            ]) ?>"
+                            class="btn btn-primary" role="button">Button
+                        </a>
+                        <a href="#" class="btn btn-default" role="button">Button</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
