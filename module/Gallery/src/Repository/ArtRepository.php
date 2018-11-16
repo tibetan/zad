@@ -24,4 +24,22 @@ class ArtRepository
 
         return $queryBuilder->getQuery()->execute();
     }
+
+    /**
+     * @param EntityManager $entityManager
+     * @param int $id
+     * @return Art|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getArtById(EntityManager $entityManager, int $id): ?Art
+    {
+        $queryBuilder = $entityManager->createQueryBuilder();
+        $queryBuilder->select('a')
+            ->from(Art::class, 'a')
+            ->where('a.id = :id')
+            ->setParameter('id', $id)
+            ->innerJoin(Image::class, 'i', Join::WITH, 'i.art = a.id');
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
 }

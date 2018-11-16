@@ -5,6 +5,7 @@ namespace Gallery\Service;
 use Gallery\Repository\SlugRepository;
 use Gallery\Repository\ArtRepository;
 use Gallery\Entity\Slug;
+use Gallery\Entity\Art;
 use Doctrine\ORM\EntityManager;
 
 class GalleryService
@@ -56,5 +57,16 @@ class GalleryService
     public function getArtsBySlug(EntityManager $entityManager, Slug $slug): array
     {
         return $this->artRepository->getArtsBySlug($entityManager, $slug);
+    }
+
+    /**
+     * @param EntityManager $entityManager
+     * @param int $id
+     * @return Art|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getArtById(EntityManager $entityManager, int $id): ?Art
+    {
+        return $this->artRepository->getArtById($entityManager, $id);
     }
 }

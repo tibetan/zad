@@ -54,13 +54,15 @@ class GalleryController extends AbstractActionController
 
     public function artAction()
     {
-        $slugName = $this->params()->fromRoute('slug');
+        $artId = $this->params()->fromRoute('id');
 
-        if (!$slugName) {
+        if (!$artId) {
             $this->getResponse()->setStatusCode(404);
             return;
         }
 
-        return [];
+        $art =  $this->service->getArtById($this->entityManager, $artId);
+
+        return ['art' => $art];
     }
 }

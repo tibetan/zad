@@ -11,8 +11,8 @@
         <div class="col-sm-6 col-md-4">
             <div class="thumbnail">
                 <img
-                        src="<?= $this->basePath($a->getImages()[0]->getPath()) ?>"
-                        alt="<?= $a->getImages()[0]->getAlt() ?>"
+                        src="<?= $this->basePath($a->getImages()->first()->getPath()) ?>"
+                        alt="<?= $a->getImages()->first()->getAlt() ?>"
                 >
                 <div class="caption">
                     <h3><?= $a->getTitle() ?></h3>
